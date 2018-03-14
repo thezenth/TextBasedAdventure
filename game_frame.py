@@ -3,6 +3,9 @@ import math
 from object import Object
 from area import Area
 
+# some "global/static" variables
+MIN_TALK_DISTANCE = 3
+
 class GameFrame:
     # ===== Constructor =====
     def __init__(self, player, area):
@@ -51,14 +54,28 @@ class GameFrame:
     # talk prompt --> will provide menu of options
     def talk_prompt(self, target):
         dist = math.sqrt( ((self.player.x - target.x) ** 2) + ((self.player.y - target.y) ** 2) )
-        if dist <= 2:
-            self.player.talk_to(target)
+        if dist <= MIN_TALK_DISTANCE:
+            print(
+                "\nWhat do you want to say?\n" +
+                "\t1.) Inquire about recent events.\n" +
+                "\t2.) Inquire about local monsters and beasts.\n" +
+                "\t3.) Challenge " + target.name + " to a duel!\n"
+            )
+            selection = raw_input("Selection #: ")
+            #self.player.talk_to(target)
 
     # trade prompt --> will provide menu of options based on target's items and what they are willing to trade for each
     def trade_prompt(self, target):
         dist = math.sqrt( ((self.player.x - target.x) ** 2) + ((self.player.y - target.y) ** 2) )
-        if dist <= 2:
-            self.player.trade_with(target)
+        if dist <= MIN_TALK_DISTANCE:
+            menuString = "\nHmm, here's what I'll trade...\n Name \t Value \n"
+            availableItems = []
+            n = 0 # keep track of index in availableItems/provide a easy selection number
+            for item in target.items:
+                menuString += "\t" + n + ".) " + item.name + "\t" + item.value
+            
+            itemSelection = raw_input("Item #: ")
+            #self.player.trade_with(target)
 
     # interact movement prompt
     def interact_prompt(self):
