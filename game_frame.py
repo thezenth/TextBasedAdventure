@@ -62,7 +62,7 @@ class GameFrame:
                 "\t3.) Challenge " + target.name + " to a duel!\n"
             )
             selection = raw_input("Selection #: ")
-            #self.player.talk_to(target)
+
 
     # trade prompt --> will provide menu of options based on target's items and what they are willing to trade for each
     def trade_prompt(self, target):
@@ -73,9 +73,17 @@ class GameFrame:
             n = 0 # keep track of index in availableItems/provide a easy selection number
             for item in target.items:
                 menuString += "\t" + n + ".) " + item.name + "\t" + item.value
-            
+
             itemSelection = raw_input("Item #: ")
-            #self.player.trade_with(target)
+            if ( itemSelection != "cancel" ):
+                try:
+                    self.player.trade(
+                        availableItems[ int(itemSelection) ],
+                        target
+                    )
+                except ValueError:
+                    print("Not a valid integer!")
+
 
     # interact movement prompt
     def interact_prompt(self):
@@ -90,11 +98,11 @@ class GameFrame:
         target = self.area.find_character_by_name(target_name)
 
         if interaction == "attack":
-            attack_prompt(target)
+            self.attack_prompt(target)
         elif interaction == "talk":
-            talk_prompt(target)
+            self.talk_prompt(target)
         elif interaction == "trade":
-            trade_prompt(target)
+            self.trade_prompt(target)
 
     # quit the game
     def quit_action(self):
