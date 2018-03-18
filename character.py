@@ -1,11 +1,12 @@
 from object import Object
 
 class Character(Object):
-    def __init__(self, x, y, char, color, name, range, money, items = [], knowledge = []):
+    def __init__(self, x, y, char, color, name, range, money, hostile = False, items = [], knowledge = []):
         Object.__init__(self, x, y, char, color)
         self.name = name
         self.range = range
         self.money = money
+        self.hostile = hostile
         self.items = items # dictionray of items and what they are willing to trade for
         self.knowledge = knowledge # dictionary of knowledge tidbits according to menu
         """

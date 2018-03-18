@@ -84,7 +84,6 @@ class GameFrame:
                 except ValueError:
                     print("Not a valid integer!")
 
-
     # interact movement prompt
     def interact_prompt(self):
         interaction = raw_input("Attack, talk, or trade? ").lower()
@@ -103,6 +102,11 @@ class GameFrame:
             self.talk_prompt(target)
         elif interaction == "trade":
             self.trade_prompt(target)
+
+    # look action
+    def look(self):
+        print(self.area.print_area_map())
+
 
     # quit the game
     def quit_action(self):
