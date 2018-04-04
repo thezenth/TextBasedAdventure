@@ -1,3 +1,5 @@
+import colorama
+
 class Area:
 
     def __init__(self, name, width, height, objects = [], characters = []):
@@ -30,7 +32,7 @@ class Area:
             for x in range(0, self.height + 1):
                 obj = self.check_if_object_at_position(x, y)
                 if obj is not None:
-                    mapStr += obj.char
+					mapStr += obj.color + obj.char + colorama.Style.RESET_ALL
                 else:
                     mapStr += "."
 

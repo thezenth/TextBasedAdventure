@@ -41,9 +41,9 @@ class GameFrame:
         elif direction == "south":
             self.player.move(0, -1)
         elif direction == "east":
-            self.player.move(-1, 0)
-        elif direction == "west":
             self.player.move(1, 0)
+        elif direction == "west":
+            self.player.move(-1, 0)
 
     # check attack... possibly prompt for different attacks later
     def attack_prompt(self, target):

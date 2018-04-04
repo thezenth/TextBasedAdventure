@@ -1,4 +1,3 @@
-import colors
 import math
 
 class Object:
